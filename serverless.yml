@@ -10,8 +10,14 @@ functions:
   getProductsList:
     handler: handler.getProductsList
     events:
-      - httpApi: 'GET /products'
+      - httpApi:
+          path: '/product'
+          method: 'get'
+          cors: true
   getProductsById:
     handler: handler.getProductsById
     events:
-      - httpApi: 'GET /products/{id}'
+      - httpApi:
+          path: '/product/{id}'
+          method: 'get'
+          cors: true

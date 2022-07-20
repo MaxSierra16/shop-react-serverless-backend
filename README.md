@@ -2,8 +2,8 @@
 Backend microservice for course aws-for-js
 
 ## endpoints:
-  GET - https://wqsbbaoyca.execute-api.us-east-1.amazonaws.com/product
-  GET - https://wqsbbaoyca.execute-api.us-east-1.amazonaws.com/product/{id}
+  - GET - https://wqsbbaoyca.execute-api.us-east-1.amazonaws.com/product
+  - GET - https://wqsbbaoyca.execute-api.us-east-1.amazonaws.com/product/{id}
 
 ## available routes
 

@@ -8,16 +8,24 @@ provider:
 
 functions:
   getProductsList:
-    handler: handler.getProductsList
+    handler: build/functions/getProductsList.getProductsList
     events:
       - httpApi:
           path: '/product'
           method: 'get'
           cors: true
   getProductsById:
-    handler: handler.getProductsById
+    handler: build/functions/getProductsById.getProductsById
     events:
       - httpApi:
           path: '/product/{id}'
           method: 'get'
           cors: true
+package:
+  exclude:
+    - node_modules/**
+    - src/**
+    - package.json
+    - tsconfig.json
+    - README.md
+    - yarn.lock

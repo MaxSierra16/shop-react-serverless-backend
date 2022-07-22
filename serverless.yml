@@ -2,6 +2,10 @@ service: product
 
 frameworkVersion: '3'
 
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-plugin-include-dependencies
+
 provider:
   name: aws
   runtime: nodejs16.x
@@ -22,10 +26,8 @@ functions:
           method: 'get'
           cors: true
 package:
+  excludeDevDependencies: false
   exclude:
-    - node_modules/**
     - src/**
-    - package.json
     - tsconfig.json
     - README.md
-    - yarn.lock

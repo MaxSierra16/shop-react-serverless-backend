@@ -10,3 +10,6 @@ build
 
 # env variables
 .env
+
+# rest client
+*.http

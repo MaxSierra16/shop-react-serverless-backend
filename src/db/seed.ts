@@ -11,7 +11,7 @@ const writeInserts = async (file) => {
     products.forEach(prod => {
         const ranNum = Math.floor(Math.random() * (10 - 2) + 2);
         const insertProduct = `INSERT INTO product (id, title, description, price) VALUES ('${prod.id}', '${prod.title}', '${prod.description}', ${prod.price});\n`
-        const insertStock = `INSERT INTO stock(product_id, count) VALUES ('${prod.id}', ${ranNum});\n \n`
+        const insertStock = `INSERT INTO stock (product_id, count) VALUES ('${prod.id}', ${ranNum});\n \n`
         queries += insertProduct
         queries += insertStock
     })
@@ -25,7 +25,8 @@ const writeInserts = async (file) => {
         try {
             // await writeInserts(file)
             await pool.query(queryFromFile)
-            console.log("Successfully seeded DB 🌱")
+            await pool.end()
+            console.log("Seeding completed!! 🌱")
         } catch (error) {
             console.log(error)
         }

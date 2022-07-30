@@ -5,4 +5,11 @@ jspm_packages
 # Serverless directories
 .serverless
 
+# Build folder
 build
+
+# env variables
+.env
+
+# rest client
+*.http

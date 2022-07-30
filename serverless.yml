@@ -2,6 +2,10 @@ service: product
 
 frameworkVersion: '3'
 
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-plugin-include-dependencies
+
 provider:
   name: aws
   runtime: nodejs16.x
@@ -12,20 +16,27 @@ functions:
     events:
       - httpApi:
           path: '/product'
-          method: 'get'
+          method: 'GET'
           cors: true
+
   getProductsById:
     handler: build/functions/getProductsById.getProductsById
     events:
       - httpApi:
           path: '/product/{id}'
-          method: 'get'
+          method: 'GET'
+          cors: true
+
+  createProduct:
+    handler: build/functions/createProduct.createProduct
+    events:
+      - httpApi:
+          path: '/product'
+          method: 'POST'
           cors: true
 package:
+  excludeDevDependencies: false
   exclude:
-    - node_modules/**
     - src/**
-    - package.json
     - tsconfig.json
     - README.md
-    - yarn.lock

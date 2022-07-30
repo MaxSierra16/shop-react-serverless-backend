@@ -1,10 +1,11 @@
-import products from "../data/productList.json";
+import pool from "../db/pool"
+import { getByIdQuery } from "../constants/queries"
 
 export const getProductsById = async (event) => {
   const { id } = event.pathParameters;
-  const product = products.find((p) => p.id === id);
+  const { rows } = await pool.query(getByIdQuery(id))
 
-  if (!product) {
+  if (!rows.length) {
     throw new Error(JSON.stringify({
       statusCode: 404,
       message: 'Product not found',
@@ -17,6 +18,6 @@ export const getProductsById = async (event) => {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true,
     },
-    body: JSON.stringify(product),
+    body: JSON.stringify(rows[0]),
   };
 };

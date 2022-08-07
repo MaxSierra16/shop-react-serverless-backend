@@ -3,6 +3,7 @@ service: product
 frameworkVersion: '3'
 
 plugins:
+  - serverless-plugin-typescript
   - serverless-dotenv-plugin
   - serverless-plugin-include-dependencies
 
@@ -12,7 +13,7 @@ provider:
 
 functions:
   getProductsList:
-    handler: .build/functions/getProductsList.getProductsList
+    handler: src/functions/getProductsList.handler
     events:
       - httpApi:
           path: '/product'
@@ -20,7 +21,7 @@ functions:
           cors: true
 
   getProductsById:
-    handler: .build/functions/getProductsById.getProductsById
+    handler: src/functions/getProductsById.handler
     events:
       - httpApi:
           path: '/product/{id}'
@@ -28,15 +29,15 @@ functions:
           cors: true
 
   createProduct:
-    handler: .build/functions/createProduct.createProduct
+    handler: src/functions/createProduct.handler
     events:
       - httpApi:
           path: '/product'
           method: 'POST'
           cors: true
-package:
-  excludeDevDependencies: false
-  exclude:
-    - src/**
-    - tsconfig.json
-    - README.md
+# package:
+#   excludeDevDependencies: false
+#   exclude:
+#     - src/**
+#     - tsconfig.json
+#     - README.md

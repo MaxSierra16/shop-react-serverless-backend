@@ -1,7 +1,7 @@
 import pool from "../db/pool"
 import { joinQuery } from "../constants/queries"
 
-export const getProductsList = async (event) => {
+export const handler = async (event) => {
   const { rows } = await pool.query(joinQuery)
 
   return {

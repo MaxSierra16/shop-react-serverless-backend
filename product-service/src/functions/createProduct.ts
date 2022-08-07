@@ -1,7 +1,7 @@
 import pool from "../db/pool"
 import { insertProductQuery, insertStockQuery } from "../constants/queries"
 
-export const createProduct = async (event) => {
+export const handler = async (event) => {
     try {
         const body = JSON.parse(event.body)
         const { rows } = await pool.query(insertProductQuery(body))

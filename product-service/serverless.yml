@@ -12,7 +12,7 @@ provider:
 
 functions:
   getProductsList:
-    handler: build/functions/getProductsList.getProductsList
+    handler: .build/functions/getProductsList.getProductsList
     events:
       - httpApi:
           path: '/product'
@@ -20,7 +20,7 @@ functions:
           cors: true
 
   getProductsById:
-    handler: build/functions/getProductsById.getProductsById
+    handler: .build/functions/getProductsById.getProductsById
     events:
       - httpApi:
           path: '/product/{id}'
@@ -28,7 +28,7 @@ functions:
           cors: true
 
   createProduct:
-    handler: build/functions/createProduct.createProduct
+    handler: .build/functions/createProduct.createProduct
     events:
       - httpApi:
           path: '/product'

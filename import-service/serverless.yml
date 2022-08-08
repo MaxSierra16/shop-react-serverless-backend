@@ -1,0 +1,38 @@
+org: maxsierra16
+app: node-in-aws-web
+service: import-service
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 's3:*'
+      Resource: { 'Fn::Join': ['', ['arn:aws:s3:::shop-react-csv', '/*']] }
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-plugin-include-dependencies
+
+functions:
+  importProductsFile:
+    handler: src/functions/importProductsFile.handler
+    events:
+      - httpApi:
+          cors: true
+          method: 'GET'
+          path: '/import'
+
+  importFileParser:
+    handler: src/functions/importFileParser.handler
+    events:
+      - s3:
+          bucket: shop-react-csv
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaded/
+          existing: true
+          forceDeploy: true

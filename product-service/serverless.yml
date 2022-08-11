@@ -3,27 +3,16 @@ service: product
 frameworkVersion: '3'
 
 plugins:
-  - serverless-plugin-typescript
   - serverless-dotenv-plugin
   - serverless-plugin-include-dependencies
-
-package:
-  excludeDevDependencies: false
 
 provider:
   name: aws
   runtime: nodejs16.x
 
-resources:
-  Resources:
-    catalogItemsQueue:
-      Type: 'AWS::SQS::Queue'
-      # Properties:
-      #   QueueName: 'catalogItemsQueue'
-
 functions:
   getProductsList:
-    handler: src/functions/getProductsList.handler
+    handler: .build/functions/getProductsList.getProductsList
     events:
       - httpApi:
           path: '/product'
@@ -31,7 +20,7 @@ functions:
           cors: true
 
   getProductsById:
-    handler: src/functions/getProductsById.handler
+    handler: .build/functions/getProductsById.getProductsById
     events:
       - httpApi:
           path: '/product/{id}'
@@ -39,20 +28,15 @@ functions:
           cors: true
 
   createProduct:
-    handler: src/functions/createProduct.handler
+    handler: .build/functions/createProduct.createProduct
     events:
       - httpApi:
           path: '/product'
           method: 'POST'
           cors: true
-
-  catalogBatchProcess:
-    handler: src/functions/catalogBatchProcess.handler
-    events:
-      - sqs:
-          arn:
-            Fn::GetAtt:
-              - catalogItemsQueue
-              - Arn
-          # arn: arn:aws:sqs:us-east-1:864208721353:TestQueue
-          batchSize: 5
+package:
+  excludeDevDependencies: false
+  exclude:
+    - src/**
+    - tsconfig.json
+    - README.md

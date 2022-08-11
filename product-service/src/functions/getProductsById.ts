@@ -1,7 +1,7 @@
 import pool from "../db/pool"
 import { getByIdQuery } from "../constants/queries"
 
-export const getProductsById = async (event) => {
+export const handler = async (event) => {
   const { id } = event.pathParameters;
   const { rows } = await pool.query(getByIdQuery(id))
 

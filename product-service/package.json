@@ -5,9 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "build": "tsc",
-    "deploy": "tsc && sls deploy",
-    "seed": "tsc && node build/db/seed.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "sls deploy",
+    "seed": "tsc && node .build/db/seed.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +25,7 @@
     "dotenv": "^16.0.1",
     "serverless-dotenv-plugin": "^4.0.1",
     "serverless-plugin-include-dependencies": "^5.0.0",
+    "serverless-plugin-typescript": "^2.1.2",
     "typescript": "^4.7.4"
   },
   "dependencies": {

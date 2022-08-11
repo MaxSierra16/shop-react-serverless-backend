@@ -1,3 +1,4 @@
+import { saveProduct } from "../db/operations"
 import pool from "../db/pool"
 import { insertProductQuery, insertStockQuery } from "../constants/queries"
 

@@ -7,9 +7,19 @@ plugins:
   - serverless-dotenv-plugin
   - serverless-plugin-include-dependencies
 
+package:
+  excludeDevDependencies: false
+
 provider:
   name: aws
   runtime: nodejs16.x
+
+resources:
+  Resources:
+    catalogItemsQueue:
+      Type: 'AWS::SQS::Queue'
+      # Properties:
+      #   QueueName: 'catalogItemsQueue'
 
 functions:
   getProductsList:
@@ -35,9 +45,14 @@ functions:
           path: '/product'
           method: 'POST'
           cors: true
-# package:
-#   excludeDevDependencies: false
-#   exclude:
-#     - src/**
-#     - tsconfig.json
-#     - README.md
+
+  catalogBatchProcess:
+    handler: src/functions/catalogBatchProcess.handler
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - catalogItemsQueue
+              - Arn
+          # arn: arn:aws:sqs:us-east-1:864208721353:TestQueue
+          batchSize: 5
